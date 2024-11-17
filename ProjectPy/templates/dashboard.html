@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #4CAF50;
+            font-size: 2rem;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .logout-btn {
+            background-color: #e74c3c;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        h3 {
+            color: #333;
+            margin-top: 30px;
+            font-size: 1.5rem;
+        }
+
+        .songs-list {
+            list-style-type: none;
+            padding: 0;
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .songs-list li {
+            background-color: #f9f9fb;
+            border-radius: 10px;
+            margin: 10px 0;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .songs-list li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .songs-list strong {
+            display: block;
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        a.download-link {
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: bold;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        a.download-link:hover {
+            color: #45a049;
+        }
+
+        @media (max-width: 600px) {
+            .button-container {
+                flex-direction: column;
+            }
+
+            h2, h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Wavcore!</h2>
+
+        <div class="button-container">
+            <button onclick="location.href='{{ url_for('profile') }}'">Profile</button>
+            <button onclick="location.href='{{ url_for('genres') }}'">Genres</button>
+            <button onclick="location.href='{{ url_for('artists') }}'">Artists</button>
+            <button onclick="location.href='{{ url_for('check_artist_status') }}'">I'm Artist</button>
+        </div>
+
+        <h3>Available Songs:</h3>
+        <ul class="songs-list">
+            {% for song in songs %}
+                <li>
+                    <strong>{{ song.title }}</strong>
+                    {% if song.user %}
+                        by {{ song.user.artist_name }} {{ song.user.artist_surname }}
+                    {% endif %}
+                    <audio controls>
+                        <source src="{{ url_for('static', filename=song.file_path.split('static/')[-1]) }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <a href="{{ url_for('static', filename=song.file_path.split('static/')[-1]) }}" download="{{ song.title }}">Download</a>
+
+                </li>
+            {% endfor %}
+        </ul>
+
+        <button class="logout-btn" onclick="location.href='{{ url_for('logout') }}'">Log Out</button>
+    </div>
+</body>
+</html>

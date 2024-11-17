@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ genre }} Songs</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+            color: #333;
+        }
+
+        header {
+            background-color: #4caf50;
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+
+        li strong {
+            font-size: 1.2rem;
+            color: #4caf50;
+        }
+
+        audio {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        a {
+            color: #4caf50;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        footer a {
+            font-size: 1rem;
+            color: #4caf50;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>{{ genre }} Songs</h2>
+    </header>
+    <main>
+        <ul>
+            {% for song in songs %}
+                <li>
+                    <strong>{{ song.title }}</strong>
+                    {% if song.user %}
+                        by {{ song.user.artist_name }} {{ song.user.artist_surname }}
+                    {% endif %}
+                    <audio controls>
+                        <source src="{{ url_for('static', filename=song.file_path.split('static/')[-1]) }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <a href="{{ url_for('static', filename=song.file_path.split('static/')[-1]) }}" download>Download</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <footer>
+            <a href="{{ url_for('genres') }}">Back to Genres</a>
+        </footer>
+    </main>
+</body>
+</html>

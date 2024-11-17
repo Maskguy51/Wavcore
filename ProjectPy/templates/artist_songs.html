@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ artist.artist_name }} {{ artist.artist_surname }}'s Songs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #28a745;
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #28a745;
+            padding-bottom: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        li:hover {
+            transform: translateY(-3px);
+        }
+
+        strong {
+            color: #28a745;
+            font-size: 18px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        audio {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        a.download-link {
+            display: inline-block;
+            text-decoration: none;
+            color: #28a745;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        a.download-link:hover {
+            color: #218838;
+        }
+
+        a.back-link {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #28a745;
+            font-weight: bold;
+            border: 2px solid #28a745;
+            padding: 8px 20px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a.back-link:hover {
+            background-color: #28a745;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Songs by {{ artist.artist_name }} {{ artist.artist_surname }}</h2>
+        <ul>
+            {% for song in songs %}
+                <li>
+                    <strong>{{ song.title }} ({{ song.genre }})</strong>
+                    <audio controls>
+                        <source src="{{ url_for('static', filename=song.file_path.split('static/')[-1]) }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <br>
+                    <a href="{{ url_for('static', filename=song.file_path.split('static/')[-1]) }}" class="download-link" download>Download</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <a href="{{ url_for('artists') }}" class="back-link">Back to Artists</a>
+    </div>
+</body>
+</html>
+

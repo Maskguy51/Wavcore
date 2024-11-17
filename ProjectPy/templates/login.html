@@ -1,0 +1,28 @@
+
+{% extends "main.html" %}
+
+{% block title %}
+Authroistration
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="card p-4" style="width: 300px;">
+        <h1 class="fs-2 text-green text-center">Login</h1>
+        <form method="post">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username:</label>
+                <input type="text" id="username" name="username" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+            <button  type="submit" class="btn btn-primary w-100 ">Login</button>
+        </form>
+        <div class="text-center mt-3">
+            <a href="{{ url_for('register') }}">Register</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

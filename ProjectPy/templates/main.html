@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <title>{% block title %}Wavcore{% endblock %}</title>
+    <style>
+        .text-green { color: #28a745 !important; }
+        .bg-green { background-color: #28a745 !important; }
+    </style>
+</head>
+<body>
+<div class="container-fluid px-5">
+    {% block body %}
+    <header class="d-flex flex-wrap justify-content-between align-items-center py-3 border-bottom">
+        <p class="h1 mb-0 text-green fw-bold">Wavcore!</p>
+        <ul class="nav col-md-4 justify-content-end">
+            <li class="nav-item"><a href="/login" class="nav-link px-2 text-green">Login</a></li>
+
+            <li class="nav-item"><a href="/register" class="nav-link px-2 text-green">Register</a></li>
+        </ul>
+    </header>
+
+    <main>
+        <section class="container text-center my-5">
+            <h2 class="pb-2 border-bottom text-green">Features</h2>
+            <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+                <div class="feature col text-center">
+                    <div class="feature-icon d-inline-flex align-items-center justify-content-center bg-green text-white fs-2 mb-3 rounded-circle" style="width: 60px; height: 60px;">
+                        <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
+                    </div>
+                    <h3 class="fs-2 text-green">Discover New Music</h3>
+                    <p class="text-secondary">Find music that matches your mood and taste. Create playlists for every moment of your life.</p>
+
+                </div>
+                <div class="feature col text-center">
+                    <div class="feature-icon d-inline-flex align-items-center justify-content-center bg-green text-white fs-2 mb-3 rounded-circle" style="width: 60px; height: 60px;">
+                        <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
+                    </div>
+                    <h3 class="fs-2 text-green">Create Your Own Tracks</h3>
+                    <p class="text-secondary">Easily record, edit, and mix your own tracks. Perfect for both beginners and music professionals.</p>
+
+                </div>
+                <div class="feature col text-center">
+                    <div class="feature-icon d-inline-flex align-items-center justify-content-center bg-green text-white fs-2 mb-3 rounded-circle" style="width: 60px; height: 60px;">
+                        <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
+                    </div>
+                    <h3 class="fs-2 text-green">Share & Collaborate</h3>
+                    <p class="text-secondary">Share your tracks with friends and connect with like-minded creators.</p>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="container-fluid py-5 my-5 border-top">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 text-center">
+            <div class="col mb-3">
+                <a href="/" class="d-flex align-items-center justify-content-center mb-3 text-green text-decoration-none">
+                    <svg class="bi" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+                </a>
+                <p class="text-muted">© Shpak.team</p>
+            </div>
+            <div class="col mb-3">
+                <h5 class="text-green">Sections</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-green">Home</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-green">Features</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-green">Pricing</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-green">FAQs</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-green">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    {% endblock %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
